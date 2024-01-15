@@ -1,0 +1,9 @@
+# .gitignore
+
+# CocoaPods
+Pods/
+Podfile.lock
+
+# Xcode
+*.xcworkspace
+*.xcuserstate
