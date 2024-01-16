@@ -14,9 +14,16 @@ class ImageGalleryVC: UIViewController {
     @IBOutlet weak var galleryCollection: UICollectionView!
     
     var imageArray: [PixabayImage] = []
-
+    var screenSize: CGRect!
+    var screenWidth: CGFloat!
+    var screenHeight: CGFloat!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        collectionViewSetup()
+        initCollectionView()
+
         APIRequestHandler.sharedInstance().fetchImages() { [weak self] data, success in
             DispatchQueue.main.async {
                 guard let self = self else { return }
@@ -35,14 +42,24 @@ class ImageGalleryVC: UIViewController {
             }
         }
 
-        initCollectionView()
 
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
+    func collectionViewSetup() {
         
-
+        screenSize = UIScreen.main.bounds
+        screenWidth = screenSize.width
+        screenHeight = screenSize.height
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 0.3, left: 4, bottom: 0.3, right: 4)
+        
+        let itemWidth = (screenWidth - 12) / 3
+        layout.itemSize = CGSize(width: itemWidth, height: itemWidth)
+        
+        layout.minimumInteritemSpacing = 2
+        layout.minimumLineSpacing = 2
+        galleryCollection.collectionViewLayout = layout
     }
+
     private func initCollectionView() {
       let nib = UINib(nibName: "ImageViewCell", bundle: nil)
         galleryCollection.register(nib, forCellWithReuseIdentifier: "GalleryImageCell")
@@ -64,25 +81,8 @@ extension ImageGalleryVC: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = galleryCollection.dequeueReusableCell(withReuseIdentifier: "GalleryImageCell", for: indexPath) as! ImageViewCell
-
-           cell.configure(with: imageArray[indexPath.row])
-        
-//        let cell = galleryCollection.dequeueReusableCell(withReuseIdentifier: "GalleryImageCell", for: indexPath) as! ImageViewCell
-//
-//        if let imageURL = URL(string: imageArray[indexPath.row].largeImageURL){
-//            cell.image.sd_imageIndicator = SDWebImageActivityIndicator.gray
-//            cell.image.sd_imageIndicator?.startAnimatingIndicator()
-//            cell.image.sd_setImage(with: imageURL, placeholderImage: UIImage(named: "photo"), options: .continueInBackground, completed: nil)
-//            cell.image.contentMode = .scaleToFill
-//
-//            cell.image.layer.cornerRadius = 20
-//           } else {
-//               print("Invalid URL")
-//               cell.image.image = UIImage(named: "photo")
-//           }
-//        cell.imageName.text = imageArray[indexPath.row].user
-//
-          return cell
+        cell.configure(with: imageArray[indexPath.row])
+        return cell
         
     }
     

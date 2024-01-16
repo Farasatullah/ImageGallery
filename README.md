@@ -21,6 +21,7 @@ This iOS application showcases an image gallery, offering a user-friendly displa
 ## Note
 
 - Minimum iOS development Target set to iOS 16.2
+- Used Xcode-14.0 Compaitple for development
 
 
 ## Installation

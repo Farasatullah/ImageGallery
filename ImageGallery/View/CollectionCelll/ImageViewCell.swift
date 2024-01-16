@@ -23,7 +23,8 @@ class ImageViewCell: UICollectionViewCell {
         if let imageURL = URL(string: imageInfo.largeImageURL) {
                 image.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 image.sd_imageIndicator?.startAnimatingIndicator()
-                image.sd_setImage(with: imageURL, placeholderImage: UIImage(named: "photo"), options: .continueInBackground, completed: nil)
+            let sfSymbolImage = UIImage(systemName: "photo")
+                image.sd_setImage(with: imageURL, placeholderImage: sfSymbolImage, options: .continueInBackground, completed: nil)
                 image.contentMode = .scaleAspectFit
                 image.layer.cornerRadius = 20
 
@@ -36,7 +37,7 @@ class ImageViewCell: UICollectionViewCell {
 //        image.widthAnchor.constraint(equalToConstant: CGFloat(imageInfo.imageWidth)).isActive = true
 //        image.heightAnchor.constraint(equalToConstant: CGFloat(imageInfo.imageHeight)).isActive = true
 
-        imageName.text = imageInfo.user
+//        imageName.text = imageInfo.user
         
         }
 }

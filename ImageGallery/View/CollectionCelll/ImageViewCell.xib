@@ -21,27 +21,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="100" height="160"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OfV-hV-v3u">
-                                <rect key="frame" x="0.0" y="0.0" width="100" height="115"/>
+                                <rect key="frame" x="0.0" y="0.0" width="100" height="160"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="HhD-jj-g3L"/>
                                     <constraint firstAttribute="height" constant="115" id="n81-WP-Wux"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="n81-WP-Wux"/>
+                                    </mask>
+                                </variation>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GV5-i0-ptb">
-                                <rect key="frame" x="0.0" y="115" width="100" height="45"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="GV5-i0-ptb" secondAttribute="bottom" id="Vka-ki-HVR"/>
+                            <constraint firstAttribute="bottom" secondItem="OfV-hV-v3u" secondAttribute="bottom" id="3rV-6r-KeE"/>
                             <constraint firstAttribute="trailing" secondItem="OfV-hV-v3u" secondAttribute="trailing" id="YK0-bf-P5L"/>
                             <constraint firstItem="OfV-hV-v3u" firstAttribute="top" secondItem="kbs-kU-XK8" secondAttribute="top" id="cPi-cZ-Rds"/>
-                            <constraint firstAttribute="trailing" secondItem="GV5-i0-ptb" secondAttribute="trailing" id="kQl-fh-YhF"/>
-                            <constraint firstItem="GV5-i0-ptb" firstAttribute="top" secondItem="OfV-hV-v3u" secondAttribute="bottom" id="kqT-yH-zku"/>
-                            <constraint firstItem="GV5-i0-ptb" firstAttribute="leading" secondItem="kbs-kU-XK8" secondAttribute="leading" id="sQq-K3-GsW"/>
                             <constraint firstItem="OfV-hV-v3u" firstAttribute="leading" secondItem="kbs-kU-XK8" secondAttribute="leading" id="ypG-KH-gM9"/>
                         </constraints>
                     </view>
@@ -57,7 +53,6 @@
             <connections>
                 <outlet property="background" destination="kbs-kU-XK8" id="dft-UG-kec"/>
                 <outlet property="image" destination="OfV-hV-v3u" id="GeD-ZL-IDj"/>
-                <outlet property="imageName" destination="GV5-i0-ptb" id="RXl-VQ-onS"/>
             </connections>
             <point key="canvasLocation" x="138.93129770992365" y="19.718309859154932"/>
         </collectionViewCell>
