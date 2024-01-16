@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class ImageViewCell: UICollectionViewCell {
 
@@ -18,4 +19,24 @@ class ImageViewCell: UICollectionViewCell {
         // Initialization code
     }
 
+    func configure(with imageInfo: PixabayImage) {
+        if let imageURL = URL(string: imageInfo.largeImageURL) {
+                image.sd_imageIndicator = SDWebImageActivityIndicator.gray
+                image.sd_imageIndicator?.startAnimatingIndicator()
+                image.sd_setImage(with: imageURL, placeholderImage: UIImage(named: "photo"), options: .continueInBackground, completed: nil)
+                image.contentMode = .scaleAspectFit
+                image.layer.cornerRadius = 20
+
+            } else {
+                print("Invalid URL")
+                image.image = UIImage(named: "photo")
+            }
+        
+//        
+//        image.widthAnchor.constraint(equalToConstant: CGFloat(imageInfo.imageWidth)).isActive = true
+//        image.heightAnchor.constraint(equalToConstant: CGFloat(imageInfo.imageHeight)).isActive = true
+
+        imageName.text = imageInfo.user
+        
+        }
 }

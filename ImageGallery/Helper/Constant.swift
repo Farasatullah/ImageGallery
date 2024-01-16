@@ -7,5 +7,7 @@
 
 import Foundation
 
-let BASE_URL = "https://pixabay.com/api/?key=\(API_KEY)&q=yellow+flowers&image_type=photo"
 let API_KEY = "41836081-2eb265d9a2fb40b217db0f822"
+let searchQuery = "yellow"
+let BASE_URL = "https://pixabay.com/api/?key=\(API_KEY)&q=\(searchQuery)+flowers&image_type=photo"
+

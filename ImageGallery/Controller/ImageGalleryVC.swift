@@ -17,40 +17,30 @@ class ImageGalleryVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        APIRequestHandler.sharedInstance().fetchImages() { [self] data, success in
-            print("Data count: \(data.count)")
-            
-            guard !data.isEmpty else {
-                print("Error: Data cannot be empty.")
-                return
+        APIRequestHandler.sharedInstance().fetchImages() { [weak self] data, success in
+            DispatchQueue.main.async {
+                guard let self = self else { return }
                 
-            }
-
-            
-            for pixaBay in data {
+                print("Data count: \(data?.hits.count ?? 0)")
                 
-
-                for pixabayImageInfo in pixaBay.hits {
-                    print("Image URL : \(pixabayImageInfo.imageURL)")
-                    print("Image id : \(pixabayImageInfo.id)")
-                    self.imageArray.append(pixabayImageInfo)
-
+                guard let hits = data?.hits, !hits.isEmpty else {
+                    print("Error: Hits array is empty.")
+                    return
                 }
-                print("No of total: \(pixaBay.total)")
-                print("No of total tohits: \(pixaBay.totalHits)")
 
+                self.imageArray = hits
+                self.galleryCollection.reloadData()
+
+                print("Success: \(success)")
             }
-                       print("Success: \(success)")
-//            imageArray = data
-                       // Use 'data' here as needed in your app
-                   }
-        // Do any additional setup after loading the view.
+        }
+
+        initCollectionView()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
-        initCollectionView()
 
     }
     private func initCollectionView() {
@@ -74,30 +64,27 @@ extension ImageGalleryVC: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = galleryCollection.dequeueReusableCell(withReuseIdentifier: "GalleryImageCell", for: indexPath) as! ImageViewCell
-        
-        if let imageURL = URL(string: imageArray[indexPath.row].imageURL){
-            cell.image.sd_imageIndicator = SDWebImageActivityIndicator.gray
-            cell.image.sd_imageIndicator?.startAnimatingIndicator()
-            cell.image.sd_setImage(with: imageURL, placeholderImage: UIImage(named: "photo"), options: .continueInBackground, completed: nil)
-            cell.image.contentMode = .scaleToFill
-            cell.image.layer.cornerRadius = cell.image.frame.height/2
-           } else {
-               print("Invalid URL")
-               cell.image.image = UIImage(named: "photo")
-           }
-        cell.imageName.text = imageArray[indexPath.row].user
 
+           cell.configure(with: imageArray[indexPath.row])
+        
+//        let cell = galleryCollection.dequeueReusableCell(withReuseIdentifier: "GalleryImageCell", for: indexPath) as! ImageViewCell
+//
+//        if let imageURL = URL(string: imageArray[indexPath.row].largeImageURL){
+//            cell.image.sd_imageIndicator = SDWebImageActivityIndicator.gray
+//            cell.image.sd_imageIndicator?.startAnimatingIndicator()
+//            cell.image.sd_setImage(with: imageURL, placeholderImage: UIImage(named: "photo"), options: .continueInBackground, completed: nil)
+//            cell.image.contentMode = .scaleToFill
+//
+//            cell.image.layer.cornerRadius = 20
+//           } else {
+//               print("Invalid URL")
+//               cell.image.image = UIImage(named: "photo")
+//           }
+//        cell.imageName.text = imageArray[indexPath.row].user
+//
           return cell
         
     }
     
 }
-extension ImageGalleryVC: UICollectionViewDelegateFlowLayout{
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        let size = (galleryCollection.frame.size.width-10)/2
-        return CGSize(width: size, height: size)
-    }
 
-}

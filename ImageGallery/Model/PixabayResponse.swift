@@ -8,14 +8,12 @@
 import Foundation
 
 struct PixabayResponse: Codable {
-    
     let total: Int
     let totalHits: Int
     let hits: [PixabayImage]
 }
 
 struct PixabayImage: Codable {
-    
     let id: Int
     let pageURL: String
     let type: String
@@ -27,8 +25,7 @@ struct PixabayImage: Codable {
     let webformatWidth: Int
     let webformatHeight: Int
     let largeImageURL: String
-    let fullHDURL: String
-    let imageURL: String
+//    let imageURL: String
     let imageWidth: Int
     let imageHeight: Int
     let imageSize: Int
@@ -39,5 +36,6 @@ struct PixabayImage: Codable {
     let user_id: Int
     let user: String
     let userImageURL: String
-    
 }
+
+
