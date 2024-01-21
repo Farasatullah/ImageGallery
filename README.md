@@ -12,11 +12,14 @@ This iOS application showcases an image gallery, offering a user-friendly displa
 
 ## Features
 
-- Display of Images
+- Display Images with the help of URL's
 - API calls using Alamofire (Version: 5.8.1)
 - Utilized pixabay API's
 - Utilized SDWebImage Library (Version: 5.18.10)
-- Utilized Frameworks like UIKit/Storyboard, Foundation, CocoaTouch
+- Utilized Frameworks like UIKit/Storyboard,CoreLocation,Vision Foundation, CocoaTouch
+- Utilized Google Map API's
+- Configured Image and location setting
+- Implemented OCR Related Funcitonality
 
 ## Note
 
